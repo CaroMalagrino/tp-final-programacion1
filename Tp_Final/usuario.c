@@ -3,6 +3,8 @@
 #include <string.h>
 #include "usuario.h"
 
+
+//PARA CUMPLIR CON ALTA
 stUsuario cargarUnUsuario()
 {
     stUsuario nuevo;
@@ -59,15 +61,16 @@ void cargarMuchosUsuarios(char nombreArchivo[])
     }
 }
 
+//CUMPLE CON LISTA
 void mostrarUnUsuario(stUsuario nuevo)
 {
     if(nuevo.activo == 1)
     {
-     printf("ID: %d\n", nuevo.id);
-     printf("Nombre: %s\n", nuevo.nombre);
-     printf("Mail: %s\n", nuevo.mail);
-     printf("Telefono: %s\n", nuevo.telefono);
-     printf("Contrasena: %s\n", nuevo.contrasena);
+        printf("ID: %d\n", nuevo.id);
+        printf("Nombre: %s\n", nuevo.nombre);
+        printf("Mail: %s\n", nuevo.mail);
+        printf("Telefono: %s\n", nuevo.telefono);
+        printf("Contrasena: %s\n", nuevo.contrasena);
     }
 }
 
@@ -79,11 +82,14 @@ void guardarUsuarioEnArchivo(char nombreArchivo[], stUsuario nuevo)
     {
         fwrite(&nuevo,sizeof(stUsuario),1, archi);
         fclose(archi);
-    } else{
-    printf("No se pudo abrir el archivo.");
+    }
+    else
+    {
+        printf("No se pudo abrir el archivo.");
     }
 }
 
+//PARTE DE LISTA TAMBIEN
 void mostrarUsuariosEnArchivo(char nombreArchivo[])
 {
     FILE* archi = fopen(nombreArchivo, "rb");
@@ -96,7 +102,139 @@ void mostrarUsuariosEnArchivo(char nombreArchivo[])
             mostrarUnUsuario(aux);
         }
         fclose(archi);
-    } else{
-    printf("No se pudo abrir el archivo.");
+    }
+    else
+    {
+        printf("No se pudo abrir el archivo.");
+    }
+}
+
+// CUMPLE CON BAJA
+void logicaUser(char nombreArchivo[], int idBaja)
+{
+    FILE* archi = fopen(nombreArchivo, "r+b");
+    stUsuario aux;
+
+    int encontrado = 0;
+
+    if(archi != NULL)
+    {
+        while(encontrado == 0 && fread(&aux,sizeof(stUsuario),1,archi) > 0)
+        {
+            if(aux.id == idBaja && aux.activo == 1)
+            {
+                aux.activo = 0;
+
+                fseek(archi, sizeof(stUsuario) * -1, SEEK_CUR);
+
+                fwrite(&aux, sizeof(stUsuario), 1, archi);
+
+                encontrado = 1;
+            }
+        }
+        fclose(archi);
+
+        if(encontrado == 1)
+        {
+            printf("El usuario ID %d se ha dado de baja.", idBaja);
+        }
+    }
+}
+
+//CUMPLE CONSULTA
+
+int loginUser(char nombreArchivo[], char mailIngresado[], char passIngresada[])
+{
+    FILE* archi = fopen(nombreArchivo, "rb");
+    stUsuario aux;
+    int idLogeado = -1;
+
+    if(archi != NULL)
+    {
+        while(fread(&aux,sizeof(stUsuario), 1, archi) > 0)
+        {
+            if(strcmp(aux.mail, mailIngresado) == 0 && strcmp(aux.contrasena, passIngresada) == 0)
+            {
+                idLogeado = aux.id;
+            }
+        }
+        fclose(archi);
+    }
+    else
+    {
+        printf("Error al abrir el archivo.");
+    }
+    return idLogeado;
+}
+
+void consultarPorNombre(char nombreArchivo[], char nombreBuscado[])
+{
+    FILE* archi = fopen(nombreArchivo, "rb");
+    stUsuario aux;
+    int encontrado = 0;
+
+    if(archi != NULL)
+    {
+        while(fread(&aux, sizeof(stUsuario), 1, archi) > 0)
+        {
+            if(strcmp(aux.nombre, nombreBuscado) == 0 && aux.activo == 1)
+            {
+                mostrarUnUsuario(aux);
+                encontrado = 1;
+            }
+        }
+        fclose(archi);
+
+        if(encontrado == 0)
+        {
+            printf("No hay un usuario con ese nombre.");
+        }
+    }
+    else
+    {
+        printf("Error al abrir el archivo.");
+    }
+}
+//CUMPLE CON MODIFICAICON
+void modificarTelefonoUsuario(char nombreArchivo[], int idModificar)
+{
+    FILE* archi = fopen(nombreArchivo, "r+b");
+    stUsuario aux;
+    int encontrado = 0;
+
+    if(archi != NULL)
+    {
+        while(encontrado == 0 && fread(&aux, sizeof(stUsuario), 1, archi) > 0)
+        {
+            if(aux.id == idModificar && aux.activo == 1)
+            {
+                printf("Usuario: %s", aux.nombre);
+                printf("Ingrese el nuevo telefono: ");
+
+                while(getchar() != '\n');
+
+                fgets(aux.telefono, sizeof(aux.telefono), stdin);
+                aux.telefono[strcspn(aux.telefono, "\n")] = '\0';
+
+                fseek(archi, sizeof(stUsuario) * -1, SEEK_CUR);
+                fwrite(&aux, sizeof(stUsuario), 1, archi);
+
+                encontrado = 1;
+            }
+        }
+        fclose(archi);
+        if(encontrado == 1)
+        {
+            printf("Elt elefono se modifico.");
+        }
+        else
+        {
+            printf("Error al cambiar.");
+        }
+    }
+    else
+    {
+
+        printf("No se pudo abrir el archivo.");
     }
 }

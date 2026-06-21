@@ -13,6 +13,13 @@ typedef struct
 
 
 stUsuario cargarUnUsuario();
-void guardarUsuarioEnArchivo(char archivo[], stUsuario nuevo);
+void cargarMuchosUsuarios(char nombreArchivo[]);
+void mostrarUnUsuario(stUsuario nuevo);
+void guardarUsuarioEnArchivo(char nombreArchivo[], stUsuario nuevo);
+void mostrarUsuariosEnArchivo(char nombreArchivo[]);
+void logicaUser(char nombreArchivo[], int idBaja);
+int loginUser(char nombreArchivo[], char mailIngresado[], char passIngresada[]);
+void consultarPorNombre(char nombreArchivo[], char nombreBuscado[]);
+void modificarTelefonoUsuario(char nombreArchivo[], int idModificar);
 
 #endif // USUARIO_H_INCLUDED
