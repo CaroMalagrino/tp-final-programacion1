@@ -21,5 +21,8 @@ void logicaUser(char nombreArchivo[], int idBaja);
 int loginUser(char nombreArchivo[], char mailIngresado[], char passIngresada[]);
 void consultarPorNombre(char nombreArchivo[], char nombreBuscado[]);
 void modificarTelefonoUsuario(char nombreArchivo[], int idModificar);
+int pasarDatosAMatriz(char nombreArchivo[], char matriz[][50]);
+int existeEnMatriz(char matriz[][50], int validos, char textoBuscado[]);
+void ordenarPorSeleccion(stUsuario arr[], int validos);
 
 #endif // USUARIO_H_INCLUDED

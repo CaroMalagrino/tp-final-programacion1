@@ -5,9 +5,11 @@
 
 
 //PARA CUMPLIR CON ALTA
-stUsuario cargarUnUsuario()
+stUsuario cargarUnUsuario(char nombreArchivo[])
 {
     stUsuario nuevo;
+    char matrizValidacion[100][50];
+    int validosMatriz = pasarDatosAMatriz(nombreArchivo, matrizValidacion);
 
     printf("Ingrese el ID del usuario: ");
     scanf("%d", &nuevo.id);
@@ -18,12 +20,22 @@ stUsuario cargarUnUsuario()
     fgets(nuevo.nombre,sizeof(nuevo.nombre), stdin);
     nuevo.nombre[strcspn(nuevo.nombre, "\n")] = 0;
 
+    //BUCLE PARA VALIDAR, NOSE SI ESTA BIEN
+
+    do
+    {
+        printf("Ingrese el correo electronico: ");
+        fgets(nuevo.mail, sizeof(nuevo.mail), stdin);
+        nuevo.mail[strcspn(nuevo.mail, "\n")] = 0;
+
+        if(existeEnMatriz(matrizValidacion, validosMatriz, nuevo.mail) == 1)
+        {
+            printf("Error: Ese mail ya esta registrado. Intente con otro.\n");
+        }
+    }
+    while(existeEnMatriz(matrizValidacion, validosMatriz, nuevo.mail) == 1);
+
     // aca iria la de normalizar texto
-
-    printf("Ingrese el correo electronico: ");
-    fgets(nuevo.mail, sizeof(nuevo.mail), stdin);
-    nuevo.mail[strcspn(nuevo.mail, "\n")] = 0;
-
     printf("Ingrese el telefono: ");
     fgets(nuevo.telefono, sizeof(nuevo.telefono), stdin);
     nuevo.telefono[strcspn(nuevo.telefono, "\n")] = 0;
@@ -47,7 +59,7 @@ void cargarMuchosUsuarios(char nombreArchivo[])
     {
         while(opcion == 's' || opcion == 'S')
         {
-            nuevo = cargarUnUsuario();
+            nuevo = cargarUnUsuario(nombreArchivo);
             fwrite(&nuevo, sizeof(stUsuario), 1, archi);
 
             printf("Desea cargar otro usuario? s/n: ");
@@ -236,5 +248,63 @@ void modificarTelefonoUsuario(char nombreArchivo[], int idModificar)
     {
 
         printf("No se pudo abrir el archivo.");
+    }
+}
+
+int pasarDatosAMatriz(char nombreArchivo[], char matriz[][50])
+{
+    FILE* archi = fopen(nombreArchivo, "rb");
+    stUsuario aux;
+    int validos = 0;
+
+    if(archi != NULL)
+    {
+        while(fread(&aux, sizeof(stUsuario),1, archi) > 0)
+        {
+            if(aux.activo == 1)
+            {
+                strcpy(matriz[validos], aux.mail);
+                validos++;
+            }
+        }
+        fclose(archi);
+    }
+    return validos;
+}
+
+int existeEnMatriz(char matriz[][50], int validos, char textoBuscado[])
+{
+    int encontrado = 0;
+    for(int i = 0; i < validos; i++)
+    {
+        if(strcmpi(matriz[i], textoBuscado) == 0)
+        {
+            encontrado = 1;
+        }
+    }
+    return encontrado;
+}
+
+void ordenarPorSeleccion(stUsuario arr[], int validos)
+{
+    stUsuario aux;
+    int posMenor;
+
+    for(int i = 0; i < validos - 1; i++)
+    {
+        posMenor = i;
+        for(int j = i + 1; j < validos; j++)
+        {
+            if(strcmpi(arr[j].nombre, arr[posMenor].nombre) < 0)
+            {
+                posMenor = j;
+            }
+        }
+        if(posMenor != i)
+        {
+            aux = arr[i];
+            arr[i] = arr[posMenor];
+            arr[posMenor] = aux;
+        }
     }
 }

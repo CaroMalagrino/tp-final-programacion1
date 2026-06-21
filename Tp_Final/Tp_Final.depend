@@ -30,3 +30,20 @@
 
 1782021608 c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\producto.h
 
+1782063919 source:c:\users\lenky\tp-final-programacion1\tp_final\producto.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"producto.h"
+
+1782063919 c:\users\lenky\tp-final-programacion1\tp_final\producto.h
+
+1782075442 source:c:\users\lenky\tp-final-programacion1\tp_final\usuario.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"usuario.h"
+
+1782075356 c:\users\lenky\tp-final-programacion1\tp_final\usuario.h
+
