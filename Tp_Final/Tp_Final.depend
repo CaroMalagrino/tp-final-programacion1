@@ -9,3 +9,24 @@
 
 1782009254 c:\users\lenky\tp-final-programacion1\tp_final\pila.h
 
+1782018037 source:c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1782018037 source:c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\usuario.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"usuario.h"
+
+1782018037 c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\usuario.h
+
+1782025931 source:c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\producto.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"producto.h"
+
+1782021608 c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\producto.h
+
