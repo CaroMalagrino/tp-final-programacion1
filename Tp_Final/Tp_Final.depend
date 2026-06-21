@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1743445502 source:c:\users\lenky\tp-final-programacion1\tp_final\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1782009254 source:c:\users\lenky\tp-final-programacion1\tp_final\pila.c
+	<stdio.h>
+	"pila.h"
+
+1782009254 c:\users\lenky\tp-final-programacion1\tp_final\pila.h
+
