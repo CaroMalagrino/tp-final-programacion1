@@ -34,10 +34,10 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="pila.c">
+		<Unit filename="producto.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="pila.h" />
+		<Unit filename="producto.h" />
 		<Unit filename="usuario.c">
 			<Option compilerVar="CC" />
 		</Unit>
