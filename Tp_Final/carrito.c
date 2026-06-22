@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -28,3 +29,6 @@ stProducto buscarProduEnArch (char nombreArch[], char productoBuscado[])
     }
     return encontrado;
 }
+=======
+//holaaaaaaaaaaaaaaaaaaaaa
+>>>>>>> 7606be04fba3988f6d001c4675b8a7677fd443e8
