@@ -232,33 +232,34 @@ int pasarProductosAArreglo(char nombreArch[], stProducto productos[], int dimens
     return validos;
 }
 
-int buscarPosMenorPrecio (stProducto producto[], int val, int posInicial)
+int buscarPosMenorNombre (stProducto producto[], int val, int posInicial)
 {
 
     int i = posInicial;
-    int menor = producto[i].precio;
+    char nombreMenor [50];
+    strcpy(nombreMenor, producto[i].nombreProducto);
     int posMenor = i;
 
-    for (i = posInicial; i < val; i++)
+    for (i = posInicial + 1; i < val; i++)
     {
 
-        if (menor > producto[i].precio)
+        if (strcmp(producto[i].nombreProducto, nombreMenor) < 0)
         {
-            menor = producto[i].precio;
+            strcpy(nombreMenor, producto[i].nombreProducto);
             posMenor = i;
         }
     }
     return posMenor;
 }
 
-void ordenarPrecioDeMenorAMayor (stProducto producto[], int val){
+void ordenarNombreProducto(stProducto producto[], int val){
 
 int j;
 stProducto aux;
 int posMenor;
 
-for (j = 0; j < val; j++){
-    posMenor = buscarPosMenorPrecio(producto, val, j);
+for (j = 0; j < val - 1; j++){
+    posMenor = buscarPosMenorNombre(producto, val, j);
     aux = producto[j];
         producto[j] = producto[posMenor];
         producto[posMenor] = aux;

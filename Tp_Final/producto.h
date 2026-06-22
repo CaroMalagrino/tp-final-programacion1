@@ -2,10 +2,23 @@
 #define PRODUCTO_H_INCLUDED
 
 typedef struct {
-    int idProducto;                 // Identificador único (autoincremental o código)
-    char nombreProducto[30]; // Nombre del artículo (dimensión 30, ideal para fgets)
-    float precio;                   // Precio unitario del producto
-    int stock;                      // Cantidad disponible en el depósito
-    int activo;                     // 1 para Alta / 0 para Baja Lógica
+    int idProducto;
+    char nombreProducto[30];
+    float precio;
+    int stock;
+    int activo;
 } stProducto;
+
+stProducto cargarUnProducto ();
+void cargarMuchosProductos (char nombreArch []);
+void mostrarUnProducto (stProducto nuevo);
+void mostrarMuchosProductos (char nombreArch[]);
+int buscarPosProducto (char nombreArch[], char productoBuscado[]);
+int bajaLogicaProducto (char nombreArch[], char productoBuscado[]);
+void modificarPrecioDelProducto (char nombreArch[], char productoBuscado[], float nuevoPrecio);
+void consultarPorPrecioMenorAlPasado (char nombreArch[], float precioAFiltrar);
+int pasarProductosAArreglo(char nombreArch[], stProducto productos[], int dimension);
+int buscarPosMenorNombre (stProducto producto[], int val, int posInicial);
+void ordenarNombreProducto(stProducto producto[], int val);
+
 #endif
