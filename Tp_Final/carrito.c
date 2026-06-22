@@ -48,15 +48,31 @@ int verificarRepetido (char nombreArch[], char productoBUscado[],stItemCarrito* 
     return encontrado;
 }
 
-int verificarStock (char nombreArch[], char productoABuscar[], int cantidadAComparar){
+int verificarStock (char nombreArch[], char productoABuscar[], int cantidadAComparar)
+{
 
-stProducto producto = buscarProduEnArch(nombreArch, productoABuscar);
-int hayStock = 0;
+    stProducto producto = buscarProduEnArch(nombreArch, productoABuscar);
+    int hayStock = 0;
 
-if(cantidadAComparar <= producto.stock && producto.idProducto != -1){
-    hayStock = 1;
+    if(cantidadAComparar <= producto.stock && producto.idProducto != -1)
+    {
+        hayStock = 1;
 
+    }
+    return hayStock;
 }
-return hayStock;
+
+int buscarPosEnCarrito (stItemCarrito* carrito, int val, char productoBuscado[])
+{
+    int i = 0;
+    int posProductoBuscado = -1;
+
+    for (i = 0; i < val; i++)
+    {
+        if (strcasecmp(carrito[i].producto.nombreProducto, productoBuscado) == 0)
+        {
+            posProductoBuscado = i;
+        }
+    }
+    return posProductoBuscado;
 }
-//m.
