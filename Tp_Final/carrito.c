@@ -48,3 +48,15 @@ int verificarRepetido (char nombreArch[], char productoBUscado[],stItemCarrito* 
     return encontrado;
 }
 
+int verificarStock (char nombreArch[], char productoABuscar[], int cantidadAComparar){
+
+stProducto producto = buscarProduEnArch(nombreArch, productoABuscar);
+int hayStock = 0;
+
+if(cantidadAComparar <= producto.stock && producto.idProducto != -1){
+    hayStock = 1;
+
+}
+return hayStock;
+}
+//m
