@@ -316,7 +316,7 @@ void insertarOrdenadorPorId(stUsuario arr[], int validos, stUsuario dato)
     while(i >= 0 && arr[i].id > dato.id)
     {
         arr[i + 1] = arr[i];
-        i--
+        i--;
     }
     arr[i + 1] = dato;
 }

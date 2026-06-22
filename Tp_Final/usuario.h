@@ -24,5 +24,7 @@ void modificarTelefonoUsuario(char nombreArchivo[], int idModificar);
 int pasarDatosAMatriz(char nombreArchivo[], char matriz[][50]);
 int existeEnMatriz(char matriz[][50], int validos, char textoBuscado[]);
 void ordenarPorSeleccion(stUsuario arr[], int validos);
+void insertarOrdenadorPorId(stUsuario arr[], int validos, stUsuario dato);
+void ordenarPorInserccionId(stUsuario arr[], int validos);
 
 #endif // USUARIO_H_INCLUDED

@@ -76,3 +76,38 @@ int buscarPosEnCarrito (stItemCarrito* carrito, int val, char productoBuscado[])
     }
     return posProductoBuscado;
 }
+
+/*void modificarCantidadCarrito(stItemCarrito* carrito, int validos, char archProductos)
+{
+    char nombreBuscado[30];
+    int cantidadNueva;
+    int hayStock = 0;
+    int posCarrito = -1;
+}*/
+
+
+
+void mostrarCarrito(stItemCarrito* carrito, int validos)
+{
+    float subtotal = 0;
+    float totalAcumulado = 0;
+
+    if(validos == 0)
+    {
+        printf("Tu carrito esta vacio.");
+    }
+    else{
+        for(int i = 0; i < validos; i++)
+        {
+            subtotal = carrito[i].cantidad * carrito[i].producto.precio;
+
+            totalAcumulado += subtotal;
+
+            printf("Producto: %s", carrito[i].producto.nombreProducto);
+            printf("Cantidad: %d", carrito[i].cantidad);
+            printf("Precio por unidad: $%.2f", carrito[i].producto.precio);
+            printf("Subtotal: $%.2f", subtotal);
+        }
+        printf("Total Acumulado: $%.2f\n", totalAcumulado);
+    }
+}
