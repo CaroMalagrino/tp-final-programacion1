@@ -2,11 +2,8 @@
 #define CARRITO_H_INCLUDED
 
 typedef struct {
-    int idProducto;
-    char nombreProducto[50];
+    stProducto producto;
     int cantidad;
-    float precioUnitario;
-    float subtotal;
 } stItemCarrito;
 
 #endif

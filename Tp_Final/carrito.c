@@ -1,10 +1,10 @@
-<<<<<<< HEAD
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include "producto.h"
 #include "usuario.h"
+#include "carrito.h"
 
 stProducto buscarProduEnArch (char nombreArch[], char productoBuscado[])
 {
@@ -12,11 +12,12 @@ stProducto buscarProduEnArch (char nombreArch[], char productoBuscado[])
     FILE* archi = fopen(nombreArch, "rb");
     stProducto aux;
     stProducto encontrado;
+    encontrado.idProducto = -1;
     if (archi != NULL)
     {
         while(fread(&aux, sizeof(stProducto), 1, archi) > 0)
         {
-            if(strcasecmp(aux.nombreProducto, productoBuscado) == 0)
+            if(strcasecmp(aux.nombreProducto, productoBuscado) == 0 && aux.activo == 1)
             {
                 encontrado = aux;
             }
@@ -25,10 +26,25 @@ stProducto buscarProduEnArch (char nombreArch[], char productoBuscado[])
     }
     else
     {
-        printf("¿Desea cargar otro producto?: (s/n)");
+        printf("El archivo no existe o no pudo abrirse");
     }
     return encontrado;
 }
-=======
-//holaaaaaaaaaaaaaaaaaaaaa
->>>>>>> 7606be04fba3988f6d001c4675b8a7677fd443e8
+
+int verificarRepetido (char nombreArch[], char productoBUscado[],stItemCarrito* carrito, int val)
+{
+    stProducto producto = buscarProduEnArch(nombreArch, productoBUscado);
+    int encontrado = -1;
+    int i = 0;
+
+    while (i < val && producto.activo == 1)
+    {
+        if (producto.idProducto == carrito[i].producto.idProducto)
+        {
+            encontrado = i;
+        }
+        i++;
+    }
+    return encontrado;
+}
+
