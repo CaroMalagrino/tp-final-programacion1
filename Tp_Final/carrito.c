@@ -81,7 +81,7 @@ int buscarPosEnCarrito (stItemCarrito* carrito, int val, char productoBuscado[])
 int modificarCantidadCarrito(char nombreArch[], stItemCarrito* carrito, int pos, int cantidadAModificar, int val)
 {
     int pudoModificarse = 0;
-    int siHayStock = hayStock(nombreArch, carrito[pos].producto.nombreProducto, cantidadAModificar);
+    int hayStock = verificarStock(nombreArch, carrito[pos].producto.nombreProducto, cantidadAModificar);
 
 
     if (hayStock == 1)
@@ -93,13 +93,21 @@ int modificarCantidadCarrito(char nombreArch[], stItemCarrito* carrito, int pos,
     return pudoModificarse;
 }
 
-void mostrarUnSoloItemDelCarrito (stItemCarrito *carrito){
+/*void mostrarUnSoloItemDelCarrito (stItemCarrito *carrito){
 
 //float subTotal = "Llamar funcion que calcula esto. La pila con la recursiva"
 printf("\n____________________________________\n");
 printf("")
 
 }
+*/
+
+int agregarProductosAlCarrito(stItemCarrito** carrito, ){
+
+
+
+}
+
 
 void mostrarCarrito(stItemCarrito* carrito, int validos)
 {

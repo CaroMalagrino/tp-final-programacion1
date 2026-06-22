@@ -13,22 +13,22 @@
 	<stdio.h>
 	<stdlib.h>
 
-1782065319 source:c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\usuario.c
+1782162792 source:c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\usuario.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"usuario.h"
 
-1782065319 c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\usuario.h
+1782162792 c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\usuario.h
 
-1782065499 source:c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\producto.c
+1782090609 source:c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\producto.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 	"producto.h"
 
-1782021608 c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\producto.h
+1782090608 c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\producto.h
 
 1782091329 source:c:\users\lenky\tp-final-programacion1\tp_final\producto.c
 	<stdio.h>
