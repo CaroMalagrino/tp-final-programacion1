@@ -59,4 +59,4 @@ if(cantidadAComparar <= producto.stock && producto.idProducto != -1){
 }
 return hayStock;
 }
-//m
+//m.
