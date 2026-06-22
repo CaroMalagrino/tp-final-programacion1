@@ -308,3 +308,26 @@ void ordenarPorSeleccion(stUsuario arr[], int validos)
         }
     }
 }
+
+void insertarOrdenadorPorId(stUsuario arr[], int validos, stUsuario dato)
+{
+    int i = validos -1;
+
+    while(i >= 0 && arr[i].id > dato.id)
+    {
+        arr[i + 1] = arr[i];
+        i--
+    }
+    arr[i + 1] = dato;
+}
+
+void ordenarPorInserccionId(stUsuario arr[], int validos)
+{
+    stUsuario aux;
+
+    for(int i = 1; i < validos; i++)
+    {
+        aux = arr[i];
+        insertarOrdenadorPorId(arr, i, aux);
+    }
+}
