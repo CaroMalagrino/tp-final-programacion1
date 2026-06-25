@@ -94,7 +94,7 @@ int agregarUnProductoAlCarrito (char nombreArch[], stItemCarrito** carrito, char
 
     if (producto.idProducto != -1 && hayStock != 0 )
     {
-        *carrito = malloc (sizeof(stItemCarrito));
+        //*carrito = malloc (sizeof(stItemCarrito));
         if (estaRepetido != -1)
         {
             *carrito = realloc(*carrito, sizeof(stItemCarrito) * (valActual + 1));
@@ -293,7 +293,7 @@ void gestionarCarrito(char nombreArch[], stItemCarrito** carrito, int* validos)
 
                 if(cantidadDeseada != 0 && verificarStock(nombreArch, productoDeseado, cantidadDeseada) == 0)
                 {
-                    printf("Sin stock suficiente, ingrese otra cantidad.\n");
+                    printf("No hay stock suficiente, por favor ingrese otra cantidad.\n");
                 }
             }
             while(cantidadDeseada != 0 && verificarStock(nombreArch, productoDeseado, cantidadDeseada) == 0);
@@ -329,7 +329,7 @@ void gestionarCarrito(char nombreArch[], stItemCarrito** carrito, int* validos)
                 free(*carrito);
                 *carrito = NULL;
                 *validos = 0;
-                printf("Compra confirmada. Gracias!\n");
+                printf("Compra confirmada. Muchas gracias por su compra!\n");
                 opcion = 0;
             }
             else

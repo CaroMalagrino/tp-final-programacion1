@@ -10,7 +10,8 @@ typedef struct {
 } stProducto;
 
 stProducto cargarUnProducto ();
-void cargarMuchosProductos (char nombreArch []);
+int verificarRepetidoArch (char nombreArch[], char productoBuscado[]);
+void cargarMuchosProductos (char nombreArch [], char productoBuscado[]);
 void mostrarUnProducto (stProducto nuevo);
 void mostrarMuchosProductos (char nombreArch[]);
 int buscarPosProducto (char nombreArch[], char productoBuscado[]);
