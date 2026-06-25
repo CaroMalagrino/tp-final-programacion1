@@ -257,18 +257,18 @@ void gestionarCarrito(char nombreArch[], stItemCarrito** carrito, int* validos)
         printf("3. Ver carrito\n");
         printf("4. Confirmar compra\n");
         printf("0. Volver\n");
-        printf("Seleccione una opcion: ");
+        printf("\nSeleccione una opcion: ");
         scanf("%d", &opcion);
         while(getchar() != '\n');
 
         switch(opcion)
         {
         case 1:
-            printf("Ingrese el nombre del producto: ");
+            printf("\nIngrese el nombre del producto: ");
             fgets(productoDeseado, 30, stdin);
             productoDeseado[strcspn(productoDeseado, "\n")] = '\0';
 
-            printf("Ingrese la cantidad: ");
+            printf("\nIngrese la cantidad: ");
             scanf("%d", &cantidadDeseada);
             while(getchar() != '\n');
 
@@ -281,7 +281,7 @@ void gestionarCarrito(char nombreArch[], stItemCarrito** carrito, int* validos)
                 printf("El carrito esta vacio.\n");
                 break;
             }
-            printf("Ingrese el nombre del producto: ");
+            printf("\nIngrese el nombre del producto: ");
             fgets(productoDeseado, 30, stdin);
             productoDeseado[strcspn(productoDeseado, "\n")] = '\0';
 

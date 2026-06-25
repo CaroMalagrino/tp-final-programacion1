@@ -12,9 +12,9 @@ stProducto cargarUnProducto ()
     printf("Ingrese el id del producto: ");
     scanf("%d", &nuevo.idProducto);
 
+    while(getchar() != '\n');
     printf("Ingrese el nombre del producto: ");
-    fflush(stdin);
-    fgets(nuevo.nombreProducto, 30, stdin);
+    fgets(nuevo.nombreProducto, sizeof(nuevo.nombreProducto), stdin);
     nuevo.nombreProducto[strcspn(nuevo.nombreProducto, "\n")] = '\0';
 
     printf("Ingrese el precio del producto: ");
@@ -33,16 +33,25 @@ void cargarMuchosProductos (char nombreArch [])
 
     FILE* archi = fopen(nombreArch, "ab");
     stProducto aux;
+    int existe = -1;
     char seguir = 's';
     if (archi != NULL)
     {
-        while (seguir == 's')
+        if(existe != 1 || aux.activo == 1)
         {
-            aux = cargarUnProducto();
-            fwrite(&aux, sizeof(stProducto), 1, archi);
+            while (seguir == 's')
+            {
+                aux = cargarUnProducto();
+                existe = 1;
+                fwrite(&aux, sizeof(stProducto), 1, archi);
 
-            printf("¿Desea cargar otro producto?: (s/n)");
-            scanf(" %c", &seguir);
+                printf("¿Desea cargar otro producto?: (s/n)");
+                scanf(" %c", &seguir);
+            }
+        }
+        else
+        {
+            printf("El producto no se puede agregar porque ya existe");
         }
 
         fclose(archi);
@@ -59,15 +68,15 @@ void cargarMuchosProductos (char nombreArch [])
 void mostrarUnProducto (stProducto nuevo)
 {
 
-    printf("Id: %d", nuevo.idProducto);
+    printf("\nId: %d", nuevo.idProducto);
 
-    printf("Prodcuto: %s", nuevo.nombreProducto);
+    printf("\nProdcuto: %s", nuevo.nombreProducto);
 
-    printf("Precio %f", nuevo.precio);
+    printf("\nPrecio %f", nuevo.precio);
 
-    printf("Stock: %d", nuevo.stock);
+    printf("\nStock: %d", nuevo.stock);
 
-    printf("Activo: %d", nuevo.activo);
+    printf("\nActivo: %d", nuevo.activo);
 
 }
 
