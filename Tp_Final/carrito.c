@@ -242,12 +242,47 @@ void modificarStockEnArchivo (char nombreArch[], stItemCarrito carrito[], int va
     }
 }
 
-void gestionarCarrito(char nombreArch[], stItemCarrito** carrito, int* validos)
+void gestionarCarrito(char archivoUsuarios[], char nombreArch[], stItemCarrito** carrito, int* validos)
 {
     int opcion;
     char productoDeseado[30];
     int cantidadDeseada;
     char confirmacion;
+    char mail[30];
+    char contrasena[30];
+    int idlogin = -1;
+    int salir = 0;
+
+    do
+    {
+        printf("Por favor ingrese su mail: ");
+        fgets(mail, 30, stdin);
+        mail[strcspn(mail, "\n")] = '\0';
+
+        printf("Ingrese su contrasena: ");
+        fgets(contrasena, 30, stdin);
+        contrasena[strcspn(contrasena, "\n")] = '\0';
+
+        idlogin = loginUser(archivoUsuarios, mail, contrasena);
+
+        if(idlogin == -1)
+        {
+            printf("Mail o contrasena incorrecta. Reintente pulsando enter, o pulse 0 para volver atras.");
+            char respuesta[5];
+            fgets(respuesta, 5, stdin);
+            if(respuesta[0] == '0')
+            {
+                salir = 1;
+            }
+        }else{
+        printf("Bienvenido, puede comenzar con su compra.\n");
+        }
+    }while(idlogin == -1 && salir == 0);
+
+    if(salir == 1)
+    {
+        return;
+    }
 
     do
     {

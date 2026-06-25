@@ -25,7 +25,7 @@ int main()
         switch(opcion)
         {
         case 1:
-            gestionarCarrito("productos.dat", &carrito, &validos);
+            gestionarCarrito("usuarios.dat", "productos.dat",&carrito, &validos);
             break;
 
         case 2:
