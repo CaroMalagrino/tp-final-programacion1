@@ -8,7 +8,6 @@ typedef struct {
     int cantidad;
 } stItemCarrito;
 
-#endif
 stProducto buscarProduEnArch (char nombreArch[], char productoBuscado[]);
 int verificarRepetido (char nombreArch[], char productoBUscado[],stItemCarrito carrito[], int val);
 int verificarStock (char nombreArch[], char productoABuscar[], int cantidadAComparar);
@@ -20,4 +19,6 @@ void gestionarPago (stItemCarrito* carrito, int val, Pila* precios);
 float sumaTotal (Pila* precios);
 void mostrarCarrito(stItemCarrito* carrito, int validos);
 void modificarStockEnArchivo (char nombreArch[], stItemCarrito carrito[], int val);
-void gestionarCarrito(char nombreArch[], stItemCarrito** carrito, int* validos);
+void gestionarCarrito(char archivoUsuarios[], char nombreArch[], stItemCarrito** carrito, int* validos);
+
+#endif

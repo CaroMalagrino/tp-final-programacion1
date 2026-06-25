@@ -13,11 +13,11 @@ int main()
 
     do
     {
-        printf("\n=== MENU PRINCIPAL ===\n");
-        printf("1. Gestionar carrito\n");
-        printf("2. Gestionar productos\n");
-        printf("3. Gestionar usuarios\n");
-        printf("0. Salir\n");
+        printf("\n---== MENU PRINCIPAL ==---\n");
+        printf(" 1. Gestionar carrito\n");
+        printf(" 2. Gestionar productos\n");
+        printf(" 3. Gestionar usuarios\n");
+        printf(" 0. Salir\n");
         printf("Seleccione una opcion: ");
         scanf("%d", &opcion);
         while(getchar() != '\n');
@@ -25,7 +25,7 @@ int main()
         switch(opcion)
         {
         case 1:
-            gestionarCarrito("productos.dat", &carrito, &validos);
+            gestionarCarrito("usuarios.dat", "productos.dat",&carrito, &validos);
             break;
 
         case 2:
