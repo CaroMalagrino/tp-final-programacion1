@@ -116,7 +116,7 @@ int agregarUnProductoAlCarrito (char nombreArch[], stItemCarrito** carrito, char
 {
     stProducto producto = buscarProduEnArch(nombreArch, productoDeseado);
     int hayStock = verificarStock(nombreArch, productoDeseado, cantidadDeseada);
-    int estaRepetido = verificarRepetido(nombreArch,productoDeseado,&carrito,valActual);
+    int estaRepetido = verificarRepetido(nombreArch,productoDeseado,*carrito,valActual);
 
 
     if (producto.idProducto != -1 && hayStock != 0 )

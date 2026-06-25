@@ -39,11 +39,22 @@
 
 1782091329 c:\users\lenky\tp-final-programacion1\tp_final\producto.h
 
-1782158449 source:c:\users\lenky\tp-final-programacion1\tp_final\usuario.c
+1782365312 source:c:\users\lenky\tp-final-programacion1\tp_final\usuario.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"usuario.h"
 
 1782158441 c:\users\lenky\tp-final-programacion1\tp_final\usuario.h
+
+1782365520 source:c:\users\lenky\tp-final-programacion1\tp_final\carrito.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"producto.h"
+	"usuario.h"
+	"carrito.h"
+
+1782137542 c:\users\lenky\tp-final-programacion1\tp_final\carrito.h
 
