@@ -9,7 +9,7 @@
 stProducto buscarProduEnArch (char nombreArch[], char productoBuscado[])
 {
     stProducto aux;
-    int posProducto = buscarPosProducto(nombreArch, productoBUscado);
+    int posProducto = buscarPosProducto(nombreArch, productoBuscado);
     stProducto encontrado;
     encontrado.idProducto = -1;
 
@@ -18,7 +18,6 @@ stProducto buscarProduEnArch (char nombreArch[], char productoBuscado[])
         FILE* archi = fopen(nombreArch, "rb");
         if (archi != NULL)
         {
-
             fseek(archi, sizeof(stProducto)*posProducto, SEEK_SET);
             if (fread(&aux, sizeof(stProducto),1,archi)>0)
             {
@@ -26,9 +25,7 @@ stProducto buscarProduEnArch (char nombreArch[], char productoBuscado[])
                 {
                     encontrado = aux;
                 }
-
             }
-
 
             fclose(archi);
         }
@@ -40,19 +37,22 @@ stProducto buscarProduEnArch (char nombreArch[], char productoBuscado[])
     return encontrado;
 }
 
-int verificarRepetido (char nombreArch[], char productoBUscado[],stItemCarrito* carrito, int val)
+int verificarRepetido (char nombreArch[], char productoBUscado[],stItemCarrito carrito[], int val)
 {
     stProducto producto = buscarProduEnArch(nombreArch, productoBUscado);
     int encontrado = -1;
     int i = 0;
 
-    while (i < val && producto.activo == 1)
+    if(producto.idProducto != -1)
     {
-        if (producto.idProducto == carrito[i].producto.idProducto)
+        while (i < val)
         {
-            encontrado = i;
+            if (producto.idProducto == carrito[i].producto.idProducto)
+            {
+                encontrado = i;
+            }
+            i++;
         }
-        i++;
     }
     return encontrado;
 }
@@ -112,26 +112,30 @@ printf("")
 }
 */
 
-int agregarUnProductoAlCarrito (char nombreArch[], stItemCarrito** carrito, char productoDeseado[], int cantidadDeseada)
+int agregarUnProductoAlCarrito (char nombreArch[], stItemCarrito** carrito, char productoDeseado[], int cantidadDeseada, int valActual)
 {
-
-    int posProducto = buscarPosProducto(nombreArch, productoDeseado);
-    *carrito = malloc (sizeof(stItemCarrito));
-    int valActual = 0;
-    stProducto aux;
+    stProducto producto = buscarProduEnArch(nombreArch, productoDeseado);
+    int hayStock = verificarStock(nombreArch, productoDeseado, cantidadDeseada);
+    int estaRepetido = verificarRepetido(nombreArch,productoDeseado,&carrito,valActual);
 
 
-    if (buscarPosProducto != -1 && aux.activo == 1)
+    if (producto.idProducto != -1 && hayStock != 0 )
     {
-
-        *carrito = realloc(*carrito, sizeof(stItemCarrito) * (valActual + 1));
-
+        *carrito = malloc (sizeof(stItemCarrito));
+        if (estaRepetido != -1)
+        {
+            *carrito = realloc(*carrito, sizeof(stItemCarrito) * (valActual + 1));
+            (*carrito)[valActual].producto = producto;
+            (*carrito)[valActual].cantidad = cantidadDeseada;
+            valActual++;
+        }
+        else
+        {
+            (*carrito)[valActual].cantidad += cantidadDeseada;
+        }
     }
 
-
-
-
-
+    return valActual;
 }
 
 /*void mostrarCarrito(stItemCarrito* carrito, int validos)
