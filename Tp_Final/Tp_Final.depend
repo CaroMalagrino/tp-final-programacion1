@@ -13,7 +13,7 @@
 
 1782377923 c:\users\lenky\tp-final-programacion1\tp_final\pila.h
 
-1782380866 source:c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\main.c
+1782383263 source:c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\main.c
 	<stdio.h>
 	<stdlib.h>
 	"producto.h"
@@ -21,13 +21,13 @@
 	"carrito.h"
 	"pila.h"
 
-1782375669 source:c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\usuario.c
+1782383263 source:c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\usuario.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"usuario.h"
 
-1782375880 c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\usuario.h
+1782383263 c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\usuario.h
 
 1782379909 source:c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\producto.c
 	<stdio.h>
@@ -67,7 +67,7 @@
 	"pila.h"
 	"producto.h"
 
-1782380329 source:c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\carrito.c
+1782383263 source:c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\carrito.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -75,7 +75,7 @@
 	"usuario.h"
 	"carrito.h"
 
-1782375826 c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\carrito.h
+1782383263 c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\carrito.h
 	"pila.h"
 	"producto.h"
 
