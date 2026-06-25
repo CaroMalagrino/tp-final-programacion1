@@ -27,5 +27,6 @@ void ordenarPorSeleccion(stUsuario arr[], int validos);
 void insertarOrdenadorPorId(stUsuario arr[], int validos, stUsuario dato);
 void ordenarPorInserccionId(stUsuario arr[], int validos);
 void gestionarUsuarios(char nombreArch[]);
+int verificarNumero(char telefono[]);
 
 #endif // USUARIO_H_INCLUDED
