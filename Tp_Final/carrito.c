@@ -8,25 +8,34 @@
 
 stProducto buscarProduEnArch (char nombreArch[], char productoBuscado[])
 {
-
-    FILE* archi = fopen(nombreArch, "rb");
     stProducto aux;
+    int posProducto = buscarPosProducto(nombreArch, productoBUscado);
     stProducto encontrado;
     encontrado.idProducto = -1;
-    if (archi != NULL)
+
+    if (posProducto != -1)
     {
-        while(fread(&aux, sizeof(stProducto), 1, archi) > 0)
+        FILE* archi = fopen(nombreArch, "rb");
+        if (archi != NULL)
         {
-            if(strcasecmp(aux.nombreProducto, productoBuscado) == 0 && aux.activo == 1)
+
+            fseek(archi, sizeof(stProducto)*posProducto, SEEK_SET);
+            if (fread(&aux, sizeof(stProducto),1,archi)>0)
             {
-                encontrado = aux;
+                if (aux.activo == 1)
+                {
+                    encontrado = aux;
+                }
+
             }
+
+
+            fclose(archi);
         }
-        fclose(archi);
-    }
-    else
-    {
-        printf("El archivo no existe o no pudo abrirse");
+        else
+        {
+            printf("El archivo no existe o no pudo abrirse");
+        }
     }
     return encontrado;
 }
@@ -88,6 +97,7 @@ int modificarCantidadCarrito(char nombreArch[], stItemCarrito* carrito, int pos,
     {
         carrito[pos].cantidad = cantidadAModificar;
         pudoModificarse = 1;
+
     }
 
     return pudoModificarse;
@@ -102,14 +112,29 @@ printf("")
 }
 */
 
-int agregarProductosAlCarrito(stItemCarrito** carrito, ){
+int agregarUnProductoAlCarrito (char nombreArch[], stItemCarrito** carrito, char productoDeseado[], int cantidadDeseada)
+{
+
+    int posProducto = buscarPosProducto(nombreArch, productoDeseado);
+    *carrito = malloc (sizeof(stItemCarrito));
+    int valActual = 0;
+    stProducto aux;
+
+
+    if (buscarPosProducto != -1 && aux.activo == 1)
+    {
+
+        *carrito = realloc(*carrito, sizeof(stItemCarrito) * (valActual + 1));
+
+    }
+
+
 
 
 
 }
 
-
-void mostrarCarrito(stItemCarrito* carrito, int validos)
+/*void mostrarCarrito(stItemCarrito* carrito, int validos)
 {
     float subtotal = 0;
     float totalAcumulado = 0;
@@ -134,3 +159,4 @@ void mostrarCarrito(stItemCarrito* carrito, int validos)
         printf("Total Acumulado: $%.2f\n", totalAcumulado);
     }
 }
+*/
