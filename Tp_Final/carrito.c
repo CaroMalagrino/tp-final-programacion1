@@ -177,6 +177,16 @@ void gestionarPago (stItemCarrito* carrito, int val, Pila* precios)
     }
 }
 
+float sumaTotal (Pila* precios){
+float totalAPagar = 0;
+if (!pilavacia(precios)){
+
+    float precioActual = desapilar(precios);
+    totalAPagar = precioActual + sumaTotal(precios);
+}
+
+return totalAPagar;
+}
 
 void mostrarCarrito(stItemCarrito* carrito, int validos)
 {

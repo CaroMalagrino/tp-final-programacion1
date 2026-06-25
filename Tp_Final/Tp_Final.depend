@@ -58,7 +58,7 @@
 
 1782137542 c:\users\lenky\tp-final-programacion1\tp_final\carrito.h
 
-1782366566 source:c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\carrito.c
+1782369919 source:c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\carrito.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -66,6 +66,9 @@
 	"producto.h"
 	"usuario.h"
 	"carrito.h"
+	"pila.h"
 
 1782109744 c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\carrito.h
+
+1782018037 c:\users\malag\desktop\programacion\tp-final-programacion1\tp_final\pila.h
 
