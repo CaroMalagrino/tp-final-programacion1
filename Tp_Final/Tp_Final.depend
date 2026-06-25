@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1782381831 source:c:\users\lenky\tp-final-programacion1\tp_final\main.c
+1782383742 source:c:\users\lenky\tp-final-programacion1\tp_final\main.c
 	<stdio.h>
 	<stdlib.h>
 	"producto.h"
@@ -55,7 +55,7 @@
 
 1782380057 c:\users\lenky\tp-final-programacion1\tp_final\usuario.h
 
-1782382869 source:c:\users\lenky\tp-final-programacion1\tp_final\carrito.c
+1782383742 source:c:\users\lenky\tp-final-programacion1\tp_final\carrito.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
