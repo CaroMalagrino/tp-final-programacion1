@@ -7,7 +7,7 @@ typedef struct Pila {
 } Pila;
 
 void inicpila(Pila* p);
-void apilar(Pila* p, int dato);
+void apilar(Pila* p, float dato);
 float desapilar(Pila* p);
 float tope(Pila* p);
 int pilavacia(Pila* p);

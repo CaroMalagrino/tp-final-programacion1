@@ -15,7 +15,7 @@ void inicpila(Pila *p)
  * @param p la referencia de de una Pila.
  * @param dato el dato a agregar.
  */
-void apilar(Pila *p, int dato)
+void apilar(Pila *p, float dato)
 {
     p->valores[p->postope] = dato;
     p->postope++;
@@ -26,9 +26,9 @@ void apilar(Pila *p, int dato)
  * @param p la referencia de una pila.
  * @return El valor removido.
  */
-int desapilar(Pila *p)
+float desapilar(Pila *p)
 {
-    int retval = p->valores[p->postope - 1];
+    float retval = p->valores[p->postope - 1];
     p->postope--;
     return retval;
 }
@@ -38,7 +38,7 @@ int desapilar(Pila *p)
  * @param p la referencia de una Pila.
  * @return el último valor en ingresar a la pila.
  */
-int tope(Pila *p)
+float tope(Pila *p)
 {
     return p->valores[p->postope - 1];
 }

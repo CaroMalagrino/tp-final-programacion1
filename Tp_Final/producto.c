@@ -28,30 +28,55 @@ stProducto cargarUnProducto ()
     return nuevo;
 }
 
-void cargarMuchosProductos (char nombreArch [])
+int verificarRepetidoArch (char nombreArch[], char productoBuscado[])
 {
+    FILE* archi = fopen(nombreArch, "rb");
+    stProducto aux;
+    int encontrado = -1;
 
+    if(archi != NULL)
+    {
+        while(fread(&aux, sizeof(stProducto),1,archi)>0)
+        {
+            if(strcasecmp(aux.nombreProducto, productoBuscado)== 0)
+            {
+                encontrado = 1;
+            }
+        }
+        fclose(archi);
+    }
+    else
+    {
+
+        printf("El producto no se puede agregar porque ya existe");
+
+    }
+    return encontrado;
+}
+
+void cargarMuchosProductos (char nombreArch [], char productoBuscado[])
+{
     FILE* archi = fopen(nombreArch, "ab");
     stProducto aux;
-    int existe = -1;
     char seguir = 's';
     if (archi != NULL)
     {
-        if(existe != 1 || aux.activo == 1)
+        while (seguir == 's')
         {
-            while (seguir == 's')
+            aux = cargarUnProducto();
+            int estaRepetido = verificarRepetidoArch(nombreArch, aux.nombreProducto);
+
+            if (estaRepetido == -1)
             {
-                aux = cargarUnProducto();
-                existe = 1;
                 fwrite(&aux, sizeof(stProducto), 1, archi);
 
                 printf("¿Desea cargar otro producto?: (s/n)");
                 scanf(" %c", &seguir);
             }
-        }
-        else
-        {
-            printf("El producto no se puede agregar porque ya existe");
+            else
+            {
+                printf("\nEl producto no puede ser agreado porque ya existe\n");
+            }
         }
 
         fclose(archi);
@@ -61,7 +86,6 @@ void cargarMuchosProductos (char nombreArch [])
         printf("El archivo no existe o no pudo abrirse");
 
     }
-
 }
 
 
@@ -300,11 +324,11 @@ void gestionarProductos(char nombreArch[])
         switch(opcion)
         {
         case 1:
-            cargarMuchosProductos(nombreArch);
+            cargarMuchosProductos(nombreArch,nombreProducto);
             break;
 
         case 2:
-            printf("Ingrese el nombre del producto a dar de baja: ");
+            printf("Ingrese el nombre del producto que desea dar de baja: ");
             fgets(nombreProducto, 30, stdin);
             nombreProducto[strcspn(nombreProducto, "\n")] = '\0';
 
@@ -332,7 +356,7 @@ void gestionarProductos(char nombreArch[])
             break;
 
         case 4:
-            printf("Ingrese el precio maximo a filtrar: ");
+            printf("Ingrese el precio que desea filtrar: ");
             scanf("%f", &precioFiltro);
             while(getchar() != '\n');
 
