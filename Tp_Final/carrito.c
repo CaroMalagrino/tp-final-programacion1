@@ -5,6 +5,7 @@
 #include "producto.h"
 #include "usuario.h"
 #include "carrito.h"
+#include "pila.h"
 
 stProducto buscarProduEnArch (char nombreArch[], char productoBuscado[])
 {
@@ -86,23 +87,6 @@ int buscarPosEnCarrito (stItemCarrito* carrito, int val, char productoBuscado[])
     return posProductoBuscado;
 }
 
-//Se le pasa la pos que devuelve la de arriba.
-int modificarCantidadCarrito(char nombreArch[], stItemCarrito* carrito, int pos, int cantidadAModificar, int val)
-{
-    int pudoModificarse = 0;
-    int hayStock = verificarStock(nombreArch, carrito[pos].producto.nombreProducto, cantidadAModificar);
-
-
-    if (hayStock == 1)
-    {
-        carrito[pos].cantidad = cantidadAModificar;
-        pudoModificarse = 1;
-
-    }
-
-    return pudoModificarse;
-}
-
 /*void mostrarUnSoloItemDelCarrito (stItemCarrito *carrito){
 
 //float subTotal = "Llamar funcion que calcula esto. La pila con la recursiva"
@@ -138,7 +122,63 @@ int agregarUnProductoAlCarrito (char nombreArch[], stItemCarrito** carrito, char
     return valActual;
 }
 
-/*void mostrarCarrito(stItemCarrito* carrito, int validos)
+int eliminarProductoDelCarrito (char productoBuscado[], stItemCarrito** carrito, int valActual)
+{
+    int posProducto = buscarPosEnCarrito(*carrito, valActual, productoBuscado);
+
+    if (posProducto != -1)
+    {
+        for (int i = posProducto; i < valActual - 1; i++)
+        {
+            (*carrito)[i] = (*carrito)[i + 1];
+
+        }
+        *carrito = realloc(*carrito, sizeof(stItemCarrito) * (valActual - 1));
+        valActual--;
+    }
+    return valActual;
+}
+
+//Se le pasa la pos que devuelve la de arriba.
+int modificarCantidadCarrito(char nombreArch[], stItemCarrito** carrito, char productoDeseado[], int cantidadNueva, int valActual)
+{
+    int pos = buscarPosEnCarrito(*carrito, valActual, productoDeseado);
+    int pudoModificar = 0;
+
+    if (pos != -1)
+    {
+        if (cantidadNueva == 0)
+        {
+            valActual = eliminarProductoDelCarrito(productoDeseado, carrito, valActual);
+            pudoModificar = 1;
+        }
+        else
+        {
+            int hayStock = verificarStock(nombreArch, productoDeseado, cantidadNueva);
+            if (hayStock == 1)
+            {
+                (*carrito)[pos].cantidad = cantidadNueva;
+                pudoModificar = 1;
+            }
+        }
+    }
+    return valActual;
+}
+
+
+void gestionarPago (stItemCarrito* carrito, int val, Pila* precios)
+{
+    float subTotal = 0;
+    for (int i = 0; i < val; i++)
+    {
+
+        subTotal = carrito[i].producto.precio * carrito[i].cantidad;
+        apilar(precios, subTotal);
+    }
+}
+
+
+void mostrarCarrito(stItemCarrito* carrito, int validos)
 {
     float subtotal = 0;
     float totalAcumulado = 0;
@@ -163,4 +203,3 @@ int agregarUnProductoAlCarrito (char nombreArch[], stItemCarrito** carrito, char
         printf("Total Acumulado: $%.2f\n", totalAcumulado);
     }
 }
-*/
