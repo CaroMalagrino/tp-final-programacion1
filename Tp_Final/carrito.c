@@ -94,8 +94,8 @@ int agregarUnProductoAlCarrito (char nombreArch[], stItemCarrito** carrito, char
 
     if (producto.idProducto != -1 && hayStock != 0 )
     {
-        //*carrito = malloc (sizeof(stItemCarrito));
-        if (estaRepetido != -1)
+        *carrito = malloc (sizeof(stItemCarrito));
+        if (estaRepetido == -1)
         {
             *carrito = realloc(*carrito, sizeof(stItemCarrito) * (valActual + 1));
             (*carrito)[valActual].producto = producto;
@@ -107,7 +107,6 @@ int agregarUnProductoAlCarrito (char nombreArch[], stItemCarrito** carrito, char
             (*carrito)[valActual].cantidad += cantidadDeseada;
         }
     }
-
     return valActual;
 }
 
@@ -196,12 +195,12 @@ void mostrarCarrito(stItemCarrito* carrito, int validos)
 
             totalAcumulado += subtotal;
 
-            printf("Producto: %s", carrito[i].producto.nombreProducto);
-            printf("Cantidad: %d", carrito[i].cantidad);
-            printf("Precio por unidad: $%.2f", carrito[i].producto.precio);
-            printf("Subtotal: $%.2f", subtotal);
+            printf("\nProducto: %s", carrito[i].producto.nombreProducto);
+            printf("\nCantidad: %d", carrito[i].cantidad);
+            printf("\nPrecio por unidad: $%.2f", carrito[i].producto.precio);
+            printf("\nSubtotal: $%.2f", subtotal);
         }
-        printf("Total Acumulado: $%.2f\n", totalAcumulado);
+        printf("\nTotal Acumulado: $%.2f\n", totalAcumulado);
     }
 }
 

@@ -7,7 +7,7 @@
 
 int main()
 {
-    stItemCarrito* carrito = NULL;
+    stItemCarrito* carrito;
     int validos = 0;
     int opcion;
 
