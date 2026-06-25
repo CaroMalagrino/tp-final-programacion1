@@ -252,16 +252,88 @@ int buscarPosMenorNombre (stProducto producto[], int val, int posInicial)
     return posMenor;
 }
 
-void ordenarNombreProducto(stProducto producto[], int val){
+void ordenarNombreProducto(stProducto producto[], int val)
+{
 
-int j;
-stProducto aux;
-int posMenor;
+    int j;
+    stProducto aux;
+    int posMenor;
 
-for (j = 0; j < val - 1; j++){
-    posMenor = buscarPosMenorNombre(producto, val, j);
-    aux = producto[j];
+    for (j = 0; j < val - 1; j++)
+    {
+        posMenor = buscarPosMenorNombre(producto, val, j);
+        aux = producto[j];
         producto[j] = producto[posMenor];
         producto[posMenor] = aux;
+    }
 }
+
+void gestionarProductos(char nombreArch[])
+{
+    int opcion;
+    char nombreProducto[30];
+    float nuevoPrecio;
+    float precioFiltro;
+
+    do
+    {
+        printf("\n--- GESTION DE PRODUCTOS ---\n");
+        printf("1. Alta de producto\n");
+        printf("2. Baja de producto\n");
+        printf("3. Modificar precio\n");
+        printf("4. Consultar por precio menor a\n");
+        printf("5. Listar todos los productos\n");
+        printf("0. Volver\n");
+        printf("Seleccione una opcion: ");
+        scanf("%d", &opcion);
+        while(getchar() != '\n');
+
+        switch(opcion)
+        {
+        case 1:
+            cargarMuchosProductos(nombreArch);
+            break;
+
+        case 2:
+            printf("Ingrese el nombre del producto a dar de baja: ");
+            fgets(nombreProducto, 30, stdin);
+            nombreProducto[strcspn(nombreProducto, "\n")] = '\0';
+
+            if(bajaLogicaProducto(nombreArch, nombreProducto) == 1)
+            {
+                printf("Producto dado de baja con exito.\n");
+            }
+            else
+            {
+                printf("No se encontro el producto.\n");
+            }
+            break;
+
+        case 3:
+            printf("Ingrese el nombre del producto a modificar: ");
+            fgets(nombreProducto, 30, stdin);
+            nombreProducto[strcspn(nombreProducto, "\n")] = '\0';
+
+            printf("Ingrese el nuevo precio: ");
+            scanf("%f", &nuevoPrecio);
+            while(getchar() != '\n');
+
+            modificarPrecioDelProducto(nombreArch, nombreProducto, nuevoPrecio);
+            printf("Precio modificado con exito.\n");
+            break;
+
+        case 4:
+            printf("Ingrese el precio maximo a filtrar: ");
+            scanf("%f", &precioFiltro);
+            while(getchar() != '\n');
+
+            consultarPorPrecioMenorAlPasado(nombreArch, precioFiltro);
+            break;
+
+        case 5:
+            mostrarMuchosProductos(nombreArch);
+            break;
+        }
+    }
+    while(opcion != 0);
 }

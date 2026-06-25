@@ -26,5 +26,6 @@ int existeEnMatriz(char matriz[][50], int validos, char textoBuscado[]);
 void ordenarPorSeleccion(stUsuario arr[], int validos);
 void insertarOrdenadorPorId(stUsuario arr[], int validos, stUsuario dato);
 void ordenarPorInserccionId(stUsuario arr[], int validos);
+void gestionarUsuarios(char nombreArch[]);
 
 #endif // USUARIO_H_INCLUDED

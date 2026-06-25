@@ -20,5 +20,6 @@ void consultarPorPrecioMenorAlPasado (char nombreArch[], float precioAFiltrar);
 int pasarProductosAArreglo(char nombreArch[], stProducto productos[], int dimension);
 int buscarPosMenorNombre (stProducto producto[], int val, int posInicial);
 void ordenarNombreProducto(stProducto producto[], int val);
+void gestionarProductos(char nombreArch[]);
 
 #endif

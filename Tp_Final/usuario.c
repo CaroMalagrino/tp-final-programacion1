@@ -3,8 +3,6 @@
 #include <string.h>
 #include "usuario.h"
 
-
-//PARA CUMPLIR CON ALTA
 stUsuario cargarUnUsuario(char nombreArchivo[])
 {
     stUsuario nuevo;
@@ -20,8 +18,6 @@ stUsuario cargarUnUsuario(char nombreArchivo[])
     fgets(nuevo.nombre,sizeof(nuevo.nombre), stdin);
     nuevo.nombre[strcspn(nuevo.nombre, "\n")] = 0;
 
-    //BUCLE PARA VALIDAR, NOSE SI ESTA BIEN
-
     do
     {
         printf("Ingrese el correo electronico: ");
@@ -35,7 +31,7 @@ stUsuario cargarUnUsuario(char nombreArchivo[])
     }
     while(existeEnMatriz(matrizValidacion, validosMatriz, nuevo.mail) == 1);
 
-    // aca iria la de normalizar texto
+
     printf("Ingrese el telefono: ");
     fgets(nuevo.telefono, sizeof(nuevo.telefono), stdin);
     nuevo.telefono[strcspn(nuevo.telefono, "\n")] = 0;
@@ -101,7 +97,6 @@ void guardarUsuarioEnArchivo(char nombreArchivo[], stUsuario nuevo)
     }
 }
 
-//PARTE DE LISTA TAMBIEN
 void mostrarUsuariosEnArchivo(char nombreArchivo[])
 {
     FILE* archi = fopen(nombreArchivo, "rb");
@@ -121,7 +116,7 @@ void mostrarUsuariosEnArchivo(char nombreArchivo[])
     }
 }
 
-// CUMPLE CON BAJA
+
 void logicaUser(char nombreArchivo[], int idBaja)
 {
     FILE* archi = fopen(nombreArchivo, "r+b");
@@ -152,8 +147,6 @@ void logicaUser(char nombreArchivo[], int idBaja)
         }
     }
 }
-
-//CUMPLE CONSULTA
 
 int loginUser(char nombreArchivo[], char mailIngresado[], char passIngresada[])
 {
@@ -330,4 +323,61 @@ void ordenarPorInserccionId(stUsuario arr[], int validos)
         aux = arr[i];
         insertarOrdenadorPorId(arr, i, aux);
     }
+}
+
+void gestionarUsuarios(char nombreArch[])
+{
+    int opcion;
+    int idUsuario;
+    char nombreBuscado[50];
+
+    do
+    {
+        printf("\n--- GESTION DE USUARIOS ---\n");
+        printf("1. Alta de usuario\n");
+        printf("2. Baja de usuario\n");
+        printf("3. Modificar telefono\n");
+        printf("4. Consultar por nombre\n");
+        printf("5. Listar todos los usuarios\n");
+        printf("0. Volver\n");
+        printf("Seleccione una opcion: ");
+        scanf("%d", &opcion);
+        while(getchar() != '\n');
+
+        switch(opcion)
+        {
+        case 1:
+            cargarMuchosUsuarios(nombreArch);
+            break;
+
+        case 2:
+            printf("Ingrese el ID del usuario a dar de baja: ");
+            scanf("%d", &idUsuario);
+            while(getchar() != '\n');
+
+            logicaUser(nombreArch, idUsuario);
+            break;
+
+        case 3:
+            printf("Ingrese el ID del usuario a modificar: ");
+            scanf("%d", &idUsuario);
+            while(getchar() != '\n');
+
+            modificarTelefonoUsuario(nombreArch, idUsuario);
+            break;
+
+        case 4:
+            printf("Ingrese el nombre a buscar: ");
+            fgets(nombreBuscado, 50, stdin);
+            nombreBuscado[strcspn(nombreBuscado, "\n")] = '\0';
+
+            consultarPorNombre(nombreArch, nombreBuscado);
+            break;
+
+        case 5:
+            mostrarUsuariosEnArchivo(nombreArch);
+            break;
+        }
+    }
+    while(opcion != 0);
 }

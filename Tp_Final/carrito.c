@@ -2,10 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "producto.h"
 #include "usuario.h"
 #include "carrito.h"
-#include "pila.h"
 
 stProducto buscarProduEnArch (char nombreArch[], char productoBuscado[])
 {
@@ -86,15 +84,6 @@ int buscarPosEnCarrito (stItemCarrito* carrito, int val, char productoBuscado[])
     }
     return posProductoBuscado;
 }
-
-/*void mostrarUnSoloItemDelCarrito (stItemCarrito *carrito){
-
-//float subTotal = "Llamar funcion que calcula esto. La pila con la recursiva"
-printf("\n____________________________________\n");
-printf("")
-
-}
-*/
 
 int agregarUnProductoAlCarrito (char nombreArch[], stItemCarrito** carrito, char productoDeseado[], int cantidadDeseada, int valActual)
 {
@@ -251,5 +240,105 @@ void modificarStockEnArchivo (char nombreArch[], stItemCarrito carrito[], int va
 
         printf("El archivo no existe o no pudo abrirse");
     }
+}
+
+void gestionarCarrito(char nombreArch[], stItemCarrito** carrito, int* validos)
+{
+    int opcion;
+    char productoDeseado[30];
+    int cantidadDeseada;
+    char confirmacion;
+
+    do
+    {
+        printf("\n--- CARRITO ---\n");
+        printf("1. Agregar producto\n");
+        printf("2. Modificar cantidad\n");
+        printf("3. Ver carrito\n");
+        printf("4. Confirmar compra\n");
+        printf("0. Volver\n");
+        printf("Seleccione una opcion: ");
+        scanf("%d", &opcion);
+        while(getchar() != '\n');
+
+        switch(opcion)
+        {
+        case 1:
+            printf("Ingrese el nombre del producto: ");
+            fgets(productoDeseado, 30, stdin);
+            productoDeseado[strcspn(productoDeseado, "\n")] = '\0';
+
+            printf("Ingrese la cantidad: ");
+            scanf("%d", &cantidadDeseada);
+            while(getchar() != '\n');
+
+            *validos = agregarUnProductoAlCarrito(nombreArch, carrito, productoDeseado, cantidadDeseada, *validos);
+            break;
+
+        case 2:
+            if(*validos == 0)
+            {
+                printf("El carrito esta vacio.\n");
+                break;
+            }
+            printf("Ingrese el nombre del producto: ");
+            fgets(productoDeseado, 30, stdin);
+            productoDeseado[strcspn(productoDeseado, "\n")] = '\0';
+
+            do
+            {
+                printf("Ingrese la nueva cantidad (0 para eliminar): ");
+                scanf("%d", &cantidadDeseada);
+                while(getchar() != '\n');
+
+                if(cantidadDeseada != 0 && verificarStock(nombreArch, productoDeseado, cantidadDeseada) == 0)
+                {
+                    printf("Sin stock suficiente, ingrese otra cantidad.\n");
+                }
+            }
+            while(cantidadDeseada != 0 && verificarStock(nombreArch, productoDeseado, cantidadDeseada) == 0);
+
+            *validos = modificarCantidadCarrito(nombreArch, carrito, productoDeseado, cantidadDeseada, *validos);
+            break;
+
+        case 3:
+            mostrarCarrito(*carrito, *validos);
+            break;
+
+        case 4:
+            if(*validos == 0)
+            {
+                printf("El carrito esta vacio.\n");
+                break;
+            }
+            mostrarCarrito(*carrito, *validos);
+
+            printf("Confirma la compra? (s/n): ");
+            scanf(" %c", &confirmacion);
+            while(getchar() != '\n');
+
+            if(confirmacion == 's' || confirmacion == 'S')
+            {
+                Pila precios;
+                inicpila(&precios);
+                gestionarPago(*carrito, *validos, &precios);
+                printf("Total a pagar: $%.2f\n", sumaTotal(&precios));
+
+                modificarStockEnArchivo(nombreArch, *carrito, *validos);
+
+                free(*carrito);
+                *carrito = NULL;
+                *validos = 0;
+                printf("Compra confirmada. Gracias!\n");
+                opcion = 0;
+            }
+            else
+            {
+                printf("Compra cancelada. Puede seguir agregando productos.\n");
+            }
+            break;
+        }
+    }
+    while(opcion != 0);
 }
 
