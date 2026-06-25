@@ -215,3 +215,41 @@ void mostrarCarrito(stItemCarrito* carrito, int validos)
         printf("Total Acumulado: $%.2f\n", totalAcumulado);
     }
 }
+
+void modificarStockEnArchivo (char nombreArch[], stItemCarrito carrito[], int val)
+{
+    FILE* archi = fopen(nombreArch, "r+b");
+
+    if (archi != NULL)
+    {
+        for (int i = 0; i < val; i++)
+        {
+            stProducto aux;
+            int encontrado = 0;
+
+            rewind(archi);
+
+            while (encontrado == 0 && fread(&aux, sizeof(stProducto),1,archi)>0)
+            {
+                if(strcasecmp(aux.nombreProducto, carrito[i].producto.nombreProducto)==0)
+                {
+                    aux.stock = aux.stock - carrito[i].cantidad;
+
+                    fseek(archi, sizeof(stProducto)* -1,SEEK_CUR);
+
+                    fwrite(&aux, sizeof(stProducto),1,archi);
+
+                    encontrado = 1;
+                }
+            }
+        }
+
+        fclose(archi);
+    }
+    else
+    {
+
+        printf("El archivo no existe o no pudo abrirse");
+    }
+}
+
